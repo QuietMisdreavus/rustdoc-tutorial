@@ -73,6 +73,42 @@ pub struct DemoStruct {
     pub field_two: Option<String>,
 }
 
+/// Note that methods are grouped into the impl blocks that they are declared in! This means that
+/// if a struct has implementations scattered in different files, or has some methods depend on
+/// some bounds on a type parameter, then they'll appear in different subsections. For example,
+/// `std::collections::HashMap` has a separate impl block for methods that create a HashMap with
+/// the default `BuildHasher`, and keeps the rest of its methods in a block that doesn't assume a
+/// specific `BuildHasher`.
+impl DemoStruct {
+    /// Make a `DemoStruct` by populating `field_two` with the given String.
+    ///
+    /// Note that methods appear in the order they're declared in! This means that, as a
+    /// documentation writer, if you want certain methods to appear before others, you need to
+    /// reorder them in the original source code. Since Rust doesn't care about the order of
+    /// declaration of methods, this won't affect the ability of your code to compile.
+    pub fn new(one: i32, two: String) -> DemoStruct {
+        DemoStruct {
+            field_one: one,
+            field_two: Some(two),
+        }
+    }
+
+    /// Make a `DemoStruct` without providing `field_two`.
+    ///
+    /// The front page mentioned that most things have `[src]` links, and this is one of the
+    /// exceptions. Individual associated methods (those attached to a struct via these impl
+    /// blocks) do not get individual `[src]` links, instead having one for the entire impl block
+    /// as a whole. This can pose a problem for items with a lot of associated methods, like
+    /// `String` or `Vec` in the standard library, so it's necessary to do a lot of scrolling at
+    /// times to find the source to the actual method you're looking for.
+    pub fn new_just_one(one: i32) -> DemoStruct {
+        DemoStruct {
+            field_one: one,
+            field_two: None,
+        }
+    }
+}
+
 /// Here we implement a trait for our struct. Note that like regular impl blocks, trait impl blocks
 /// can have documentation comments too! This is helpful to describe the implementation details of
 /// a particular trait.
