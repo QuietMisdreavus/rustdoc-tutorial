@@ -65,11 +65,23 @@ pub mod demo_module;
 
 /// An exported struct to demonstrate field, associated function, and trait implementation docs are
 /// shown.
+///
+/// At the top of pages for structs, the public fields of the struct are printed. This gives a
+/// quick overview of which fields are available, in a "source-like" presentation. Individual field
+/// documention is printed below the documentation summary.
 pub struct DemoStruct {
     /// A field containing a primitive.
+    ///
+    /// For a struct, documentation for the fields are printed right below the main documentation
+    /// summary, in the order they're declared in the struct itself.
     pub field_one: i32,
-    /// A field containing an Option. See how both `Option` and `String` are hyperlinked
-    /// separately.
+    /// A field containing an Option.
+    ///
+    /// Most type names in documentation are hyperlinked to the documentation for that type. This
+    /// includes standard library types, which link to the nightly-compiler documentation for that
+    /// type. Since doc bundles for dependencies are generated at the same time as the final crate,
+    /// links to those doc bundles are used if a crate links to a type from one of its
+    /// dependencies.
     pub field_two: Option<String>,
 }
 
