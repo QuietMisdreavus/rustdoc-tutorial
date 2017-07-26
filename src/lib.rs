@@ -58,3 +58,48 @@
 //!
 //! At this point, feel free to explore! A lot of elements in a doc bundle are hyperlinked, so
 //! click around and see where it takes you!
+
+#![deny(missing_docs)]
+
+pub mod demo_module;
+
+/// An exported struct to demonstrate field, associated function, and trait implementation docs are
+/// shown.
+pub struct DemoStruct {
+    /// A field containing a primitive.
+    pub field_one: i32,
+    /// A field containing an Option. See how both `Option` and `String` are hyperlinked
+    /// separately.
+    pub field_two: Option<String>,
+}
+
+/// An exported enum to demonstrate how enum variant docs are shown.
+pub enum DemoEnum {
+    /// A tuple variant that contains a local type.
+    VariantOne(DemoStruct),
+    /// A struct variant that contains a few fields.
+    VariantTwo {
+        /// The name of the item.
+        item: String,
+        /// How many items there are.
+        amount: usize,
+    },
+}
+
+/// An exported trait to demonstrate the difference between provided and required methods, and to
+/// show off associated types.
+pub trait DemoTrait {
+    /// An associated type; what do we return when taring?
+    type Qwop;
+
+    /// A required method, that implementors must write when implementing the trait.
+    fn frob(&self) -> usize;
+
+    /// A required method, this time returning an associated type.
+    fn tare(&self) -> Self::Qwop;
+
+    /// A provided method, implemented in terms of the required methods.
+    fn girp(&self) -> usize {
+        self.frob() * 2
+    }
+}
