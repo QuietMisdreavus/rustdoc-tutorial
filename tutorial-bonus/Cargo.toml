@@ -1,7 +1,6 @@
 [package]
-name = "tutorial"
+name = "tutorial-bonus"
 version = "0.1.0"
 authors = ["QuietMisdreavus <grey@quietmisdreavus.net>"]
 
 [dependencies]
-tutorial-bonus = { path = "tutorial-bonus" }
