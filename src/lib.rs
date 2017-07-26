@@ -73,6 +73,24 @@ pub struct DemoStruct {
     pub field_two: Option<String>,
 }
 
+/// Here we implement a trait for our struct. Note that like regular impl blocks, trait impl blocks
+/// can have documentation comments too! This is helpful to describe the implementation details of
+/// a particular trait.
+///
+/// You can document individual methods as well, but leaving those out will just include the
+/// "summary" line from the trait itself.
+impl DemoTrait for DemoStruct {
+    type Qwop = String;
+
+    fn frob(&self) -> usize {
+        self.field_one as usize
+    }
+
+    fn tare(&self) -> Self::Qwop {
+        self.field_two.as_ref().cloned().unwrap_or_else(String::new)
+    }
+}
+
 /// An exported enum to demonstrate how enum variant docs are shown.
 pub enum DemoEnum {
     /// A tuple variant that contains a local type.
